@@ -216,7 +216,70 @@ Every Fibonacci number in the range(10) was calculated and stored for future qui
 
 This solution has `O(n)` runtime.
 
+Let's now try computing bottom up, or iteratively, for an optimized solution that is not recursive. Usually an algorithm is either recursive _or_ iterative.
 
+We'll start with our base cases and work our way up from that, by setting a base case of 0 and base case of 1. Then within a for loop, that runs to n-1 (because we want to have the range up to n, not including n), we'll re-assign p0 and p1 to the next set of numbers up, to build to the next Fibonacci number.
+
+```
+def fib_iter(n):
+
+    if n == 0:
+        return 0
+
+    if n == 1:
+        return 1
+
+    p0 = 0
+    p1 = 1
+
+    for i in range(n-1):
+        next = p0 + p1
+
+        p0 = p1
+        p1 = next
+
+    return next
+
+for i in range(10):
+    print(f'{i}: {fib_iter(i)}')
+```
+
+This solution builds _up_ from the base cases, to store the outputs as the input increases. Rather than having to re-calculate the same value multiple times when working from the top down, building from the bottom up ensures that each number only needs to be calculated once.
+
+The expected output would be:
+
+```
+0: 0
+1: 1
+2: 1
+3: 2
+4: 3
+5: 5
+6: 8
+7: 13
+8: 21
+9: 34
+```
+
+(If we had left the algorithm at `for i in range(n):`, it would have been outputting one number ahead of what it should have, because it would have initially set 2 to output 2 instead of 1 --> 2:2, 3:3, 4:5, 5:8, etc..)
+
+So when we discuss scalability with algorithms, we're really asking: `How much longer does it take to calculate n+1 elements than n elements?`
+
+With the memoization and iterative optimized solutions, the algorithm becomes much more efficient, finding fib(1000) relatively quickly. With the O(2^n) brute force solution, fib(1000) is never output because the run time will stall out.
+
+When our software or algorithmic solutions have to scale to large inputs, it's critical to consider these Big O Notation concepts when deciding what type of algorithm or solution to use.
+
+If our input will always be small, then using a brute force solution may be okay. It may not ever affect our user's experience or output.
+
+But in most cases, the code we write may need to handle an unknown future number of inputs, which means we want to write optimized algorithms to prevent future issues.
+
+## Space Complexity
+
+Space complexity refers to the amount of space used by an algorithm - O(n), linear, is using 10 units per 10 inputs. Memoization uses O(n) space complexity, wheras the iterative solution has constant space complexity: O(1).
+
+We can analyze an algorithm for both space _and_ time complexity.
+
+If two algorithms are the same time complexity and memory usage is also important, we might opt for the iterative solution as the better choice. There may be different reasons to prioritize time and/or space complexity.
 
 
 
