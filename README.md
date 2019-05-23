@@ -521,7 +521,7 @@ O(n) * O(sqrt(n)) = O(n * sqrt(n)) = `O(n sqrt n)`
 
 This algorithm performs better than O(n^2) but evaluates to an unusual time complexity notation as well.
 
-Let's try one last example:
+Let's try another example:
 
 ```
 def frotz(n):
@@ -585,6 +585,82 @@ Despite this version taking twice as long as the simplified version, the _shape 
 Constants don't change the _shape_ of the curve, only how steep it is. There is no number you can multiply n^2 by to change how the line bends, so although there are better and worse case scenarios _within_ O(n^2) type algorithms, they are evaluated as equal in time complexity.
 
 
+## The 3 main rules of Big O
+
+```
+1. Discard the constant
+2. The bigger Big O Notation dominates (less efficient wins)
+3. We're interested in what happens with large values of `n` because some processes can be deceptively efficient with small values, but that doesn't account for scalability.
+```
 
 
+For our last example, let's try to figure out how many times each loop runs _without_ running the algorithm first:
 
+```
+def booley(x):
+    sum = 0
+    for i in range(0, 1463):
+        i += sum
+        for j in range(0,x):
+            for k in range(x, x+15):
+                sum +=1
+```
+
+If we break this apart line by line, we can determine the time complexity of each loop individually and then determine how they relate to one another.
+
+`for i in range(0, 1463)` indicates constant time `O(1)` because no matter how small or large x is, the time for calculating this will remain constant, even through `i += sum` happens on each loop.
+
+`for j in range(0,x)` indicates linear time `O(n)` because it will grow linearly depending on how large or small x is.
+
+`for k in range(x, x + 15)` indicates `O(15)` or O(1) because it is a nested for loop that will run exactly 15 times, no matter how big or small x is. The range will always be from x to x+15.
+
+Because all these loops are nested, we would multiply them together:
+
+O(1) * O(n) * O(15) = `O(n)`
+
+Despite two nested loops, this algorithm has a linear run time of O(n).
+
+When there are nested loops, we mutiply their time complexities to reach a final result; when the loops run independently (one after another completes), we add them together instead.
+
+
+One more example:
+
+```
+def bogey(array):
+
+    print(array[1])
+    midpoint = len(array) // 2
+    
+    for i in range(0, midpoint):
+        print(array[i])
+
+    for _ in range(1000):
+        print('hi')
+```
+
+
+`len(array) // 2` is integer division that says the length of the array divided by two.
+
+Let's break it down, line by line:
+
+`print(array[1])` = O(1)
+
+`midpoint = len(array) // 2` = O(1)
+
+`for i in range(0, midpoint)` = O(n)
+
+`print(array[1])` = O(1)
+
+`for _ in range(1000)` = O(1)
+
+`print('hi')` = O(1)
+
+When we combine these:
+
+O(1) + O(1) + ( O(n) * O(1) ) + ( O(1) * O(1) )
+
+Which combines down to:
+
+O(1) + O(1) + O(n) + O(1) = `O(n)`
+
+Again, this algorithm evaluates down to a linear time complexity.

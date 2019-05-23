@@ -105,3 +105,31 @@ def frotz_expanded(n):
 
 print(frotz(5))
 print(frotz_expanded(5))
+
+# ---------------------------------------------
+
+def booley(x):
+    sum = 0
+    for i in range(0, 1463):
+        i += sum
+        for j in range(0,x):
+            for k in range(x, x+15):
+                sum +=1
+
+# ---------------------------------------------
+
+def bogey(array):
+
+    print(array[1])
+    midpoint = len(array) // 2
+    
+    for i in range(0, midpoint):
+        print(array[i])
+
+    for _ in range(1000):
+        print('hi')
+
+
+# len(array) // 2 is integer division that says the length of the array divided by two
+
+
