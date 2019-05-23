@@ -366,17 +366,223 @@ Because O(n) is slower than O(log n), and Big O evaluates based on the _worst_ c
 
 O(n) will dominate the shape of the graphed line, because its larger time complexity dominates the overall time complexity of this algorithm. So we would consider it O(n) despite it including an O(log n) process too.
 
+```
 ** In short: When adding different Big O notations, evaluate based on the one that has the worst time complexity, aka the one whose time output will affect the overall run time the most.
-
+```
 
 What if we want to find out the time complexity of a function without looking at its source code? For example, when Python runs a search on a dictionary, how do we know how efficient it is and what method it's using?
 
 We could time the results and plot them, to see the shape of the trend line. This would require vast dictionaries with thousands or millions of items to see the way it handles large data sets.
 
 
+## Determining Big O
 
+When we want to evaluate an alogirthm for time complexity, there are two questions we'll ask:
 
-2:12:05
+```
+For a given number n, what is the maximum number of times the loop runs?
+For a given number n, how many time units is it going to take to process?
+```
+
+Let's take a look at this basic algorithm that finds the square root of the given number, and prints each whole number up to that square root.
+
+```
+import math
+
+def foo(n):
+    sq_root = int(math.sqrt(n))
+    for i in range(0, sq_root):
+        print(i, sq_root)
+```
+
+If we print out a list of the given number (n) and the length of the output (meaning the number of times the algorithm loops), we can get a better idea of the relationship between the input and loop:
+
+```
+n	sqrt(n)
+1	1
+2	1
+3	1
+4	2
+5	2
+6	2
+7	2
+8	2
+9	3
+10	3
+11	3
+12	3
+```
+
+Looking at this, it's apparent that this algorithm is not linear because as the input grows, the loops do not increase similarly.
+
+But it doesn't _exactly_ fit any of the other Big O Notations we've discussed either. So what would we describe this as?
+
+Just because our time complexity doesn't appear on the Big O complexity  graph, doesn't mean it doesn't exist. The graph shows the most common ones, but any could exist within the graph as well.
+
+For example, an accurate description of this square root algorithm might be `O(sqrt(n))` which is a valid time complexity. It's a square root of n process. As n increases, the amount of time it takes to process this algorithm will increase by the square root of n.
+
+As a programmer, when you write an algorithm like this, mentally you should be considering, "As n increases, it won't loop through the entire range up to n, but instead it will loop through to the square root of n, which indicates this is a square root process."
+
+Just because it has a for loop does not mean it is O(n) - it's _how_ the loop processes that matters for the time complexity.
+
+Let's try another one.
+
+```
+def bar(n):
+    s = 0
+
+    for i in range(n):
+        for j in range(n):
+            s += i * j
+
+    return s
+```
+
+This has a nested for loop - so given number of n, what is the maximum number of times each loop runs?
+
+We would assume this is O(n^2) because of the nested for loop, but let's adjust the function a little to be certain by logging the number of times we loop through the i loop and j loop:
+
+```
+def bar(n):
+    s = 0
+    i_count = []
+    j_count = []
+
+    for i in range(n):
+        i_count.append(i)
+        for j in range(n):
+            j_count.append(j)
+            s += i * j
+
+    return f's: {s}, i count: {len(i_count)}, j count: {len(j_count)}'
+```
+
+If we run `print(bar(5))`, the terminal prints:
+
+```
+s: 100, i count: 5, j count: 25
+```
+
+Showing that the algorithm does in fact loop through n^2 times (5 * 5 = 25, and the j loop runs 25 times).
+
+When you see a nested loop, it's important to always stay alert to the problem that O(n^2) can become slow very quickly. If the expected inputs will become large, that's a good case for optimization.
+
+_Keep in mind, not *all* nested loops are O(n^2) though._
+
+If we modify this loop to:
+
+```
+def baz(n):
+    s = 0
+
+    for i in range(n):
+        for j in range(int(math.sqrt(n))):
+            s += i * j
+
+    return s
+```
+
+What is the time complexity now?
+
+Since we're only running the inner loop O(sqrt(n)) times, does that change the time complexity to O(sqrt(n))?
+
+Again, let's expand this algorithm out to see how many loops are running:
+
+```
+def baz_expanded(n):
+    s = 0
+    i_count = []
+    j_count = []
+
+    for i in range(n):
+        i_count.append(i)
+        for j in range(int(math.sqrt(n))):
+            j_count.append(j)
+            s += i * j
+
+    return f's: {s}, i count: {len(i_count)}, j count: {len(j_count)}'
+
+print(baz(25))
+print(int(math.sqrt(25)))
+print(baz_expanded(25))
+```
+
+The terminal prints out 
+
+```
+s: 3000, i count: 25, j count: 125
+```
+
+If this algorithm were still O(n^2), the `j count` would be 625.
+
+But it's still running j sqrt(n) time for _every_ loop of i. While the loops are still fewer, it's still more similar to:
+
+O(n) * O(sqrt(n)) = O(n * sqrt(n)) = `O(n sqrt n)`
+
+This algorithm performs better than O(n^2) but evaluates to an unusual time complexity notation as well.
+
+Let's try one last example:
+
+```
+def frotz(n):
+    s = 0
+
+    for i in range(n):
+        for j in range(2*n):
+            s += i * j
+
+    return s
+```
+
+What is the time complexity of this algorithm?
+
+Before running it, let's consider.
+
+The first loop runs `for i in range(n)` which gives it O(n).
+The second loop runs `for j in range(2*n)` which gives it O(2*n).
+But it's also a nested for loop which means the time complexity is O(n^2) because the inner loop is not being limited.
+
+n * 2n in this algorithm equates to 2 * n^2, or two times n squared.
+
+Again we can expanded it out to see exactly how many times each loop runs:
+
+```
+def frotz_expanded(n):
+    s = 0
+    i_count = []
+    j_count = []
+
+    for i in range(n):
+        i_count.append(i)
+        for j in range(2*n):
+            j_count.append(j)
+            s += i * j
+
+    return f's: {s}, i count: {len(i_count)}, j count: {len(j_count)}'
+
+print(frotz(5))
+print(frotz_expanded(5))
+```
+
+This prints out in the terminal:
+
+```
+s: 450, i count: 5, j count: 50
+```
+
+n = 5
+n^2 = 25
+2 * n^2 = 50
+
+This algorithm does in fact have the time complexity of `O(2 * n^2)`.
+
+```
+But remember that constants in Big O are dropped, so we would simplify this to O(n^2) process.
+```
+
+Despite this version taking twice as long as the simplified version, the _shape of the curve_ is what we care about, not the exact time of the worst case scenario. Although the curve of this algorithm (`O(2 * n^2)`)might be steeper than just `O(n^2)`, the shape of the line is the same.
+
+Constants don't change the _shape_ of the curve, only how steep it is. There is no number you can multiply n^2 by to change how the line bends, so although there are better and worse case scenarios _within_ O(n^2) type algorithms, they are evaluated as equal in time complexity.
 
 
 
