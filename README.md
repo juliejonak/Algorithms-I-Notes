@@ -4,6 +4,8 @@ These notes are based off of Beej's previous recording for CS13 (found at: https
 
 The notes also pull from this simple overview of Big O Notation (found at: https://justin.abrah.ms/computer-science/big-o-notation-explained.html )
 
+Another explanation: https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/ 
+
 ** Also included in this repo is a copy of Grokking's Algorithms in PDF format. `Big O Notation` begins on page 10.
 
 # Lecture Notes
@@ -58,7 +60,7 @@ It cannot run faster, but it also cannot run slower. Constant time is considered
 
 ## O(n^2)
 
-`O(n^2)`, called `Order of n squared`, indicates that for every input item (n), we have to do that number squared (n^2 or n*n) operations.
+`O(n^2)`, called `Order of n squared`, indicates that for every input item (n), we have to do that number squared (n^2 or n*n) operations. This is still considered proportional to the size of the input data set, just squared.
 
 As you can imagine, that run time can become very slow, very quickly. If there are only 2 inputs, that would mean 4 operations. But if we have just 8 inputs, that's already 64 operations being computed.
 
@@ -147,4 +149,77 @@ for i in range(10):
 
 This works and outputs the first 10 Fibonacci number.
 
-Recursive solutions work and can make sense.
+Recursive solutions work and can make sense. But if we try to run it for range(30), our terminal will drastically slow down, due to the poor run time of this algorithm.
+
+Go in depth on Fibonacci here: http://www.maths.surrey.ac.uk/hosted-sites/R.Knott/Fibonacci/fibmaths.html 
+
+This is an example of... 
+
+## O(2^n)
+
+`O(2^n)`, called `Order of 2 to the nth`, is `exponential` time - for each additional input, the operations computed grow exponentially.
+
+On the graph image, this is depicted by the dark orange line of `2^n`.
+
+The standard Fibonacci calculation is a good example of this type of function, though we could optimize it to reduce the run time.
+
+The basic solution could also be called a "naive" solution - it's simple and brute force but doesn't take into account larger inputs or scalability.
+
+
+So how can we improve the Fibonacci sequence? 
+
+First, let's consider why our current solution is not ideal. If we want to find fib(8), the function is recursively trying to solve:
+
+```
+fib(8) = fib(7) + fib(6)
+fib(7) = fib(6) + fib(5)
+fib(6) = fib(5) + fib(4)
+fib(4) = fib(3) + fib(2)
+```
+
+We're finding fib(n) multiple times for each higher integer - despite having already calculated it once before.
+
+Instead, we could use a memoization (top down) solution, as well as an iterative (bottom up) solution. Both will improve our run time.
+
+If we store values that were previously calculated in a table, we can instead just reference that memory in the table for duplicate calls. This uses a cache.
+
+For our memoization (top down) solution, we'll initialize a cache that will store calculated Fibonacci numbers. We'll start with the two base cases of 0 and 1. 
+
+Then in our fib() function, if n is not currently in the cache, we'll calculate it and store it. If it is in there, we'll simply return the existing stored result.
+
+```
+cache = {}
+
+def fib(n):
+
+    if n not in cache:
+        cache[n] = fib(n-1) + fib(n-2)
+
+    return cache[n]
+
+cache[0] = 0
+cache[1] = 1
+
+for i in range(10):
+    print(fib(i))
+```
+
+As the function is run more and more, the cache will contain more and more stored Fibonacci numbers, making it faster to return results because it does not have to re-calculate each number, every time.
+
+If we print the cache after this, it will look like:
+
+```
+{0: 0, 1: 1, 2: 1, 3: 2, 4: 3, 5: 5, 6: 8, 7: 13, 8: 21, 9: 34}
+```
+
+Every Fibonacci number in the range(10) was calculated and stored for future quick access.
+
+This solution has `O(n)` runtime.
+
+
+
+
+
+
+
+
