@@ -1,6 +1,12 @@
-These notes are based off of Beej's previous recording for CS14, found at: https://www.youtube.com/watch?v=qBXYIBdWrhc&feature=youtu.be
+# Algorithms and Sorting! CS Sprint 2
 
-# Notes Lecture I
+These notes are based off of Beej's previous recording for CS13 (found at: https://www.youtube.com/watch?v=btgmegU676g&feature=youtu.be ), which condenses the usual 4 hours of lecture down to 3. 
+
+The notes also pull from this simple overview of Big O Notation (found at: https://justin.abrah.ms/computer-science/big-o-notation-explained.html )
+
+** Also included in this repo is a copy of Grokking's Algorithms in PDF format. `Big O Notation` begins on page 10.
+
+# Lecture Notes
 
 Big O Notation is a way to determine how efficient a function is, based on run time and space requirements. It evaluates based on the _worst_ case scenario of the function. 
 
@@ -95,3 +101,50 @@ If you realize a function is being called often and the run time is slow, that's
 If a database is being frequently queried for one or two types of input, and the table typically stays the same, to speed up the backend, we might opt to save those values and send them more quickly - rather than querying the database every time.
 
 Further reading: https://codeburst.io/understanding-memoization-in-3-minutes-2e58daf33a19
+
+
+## Fibonacci Numbers
+
+We can practice solving using dynamic programming techniques with the Fibonacci sequence.
+
+Learn more here: https://en.wikipedia.org/wiki/Fibonacci_number
+
+In math, the Fibonacci sequence is numbers in order, where each number is the sum of the two preceding one, starting from 0 and 1.
+
+F0 = 0
+F1 = 1
+F2 = 1 (0 + 1)
+F3 = 2 (1 + 1)
+F4 = 3 (2 + 1)
+
+And so on.
+
+0 and 1 are our base cases.
+
+A basic way of writing it might look like this:
+
+```
+fib(0) = 0
+fib(1) = 1
+fib(n) = fib(n-1) + fib(n-2)
+```
+
+So let's define the function and call it recursively:
+
+```
+def fib(n):
+    if n == 0:
+        return 0
+    
+    if n == 1:
+        return 1
+    
+    return fib(n-1) + fib(n-2)
+
+for i in range(10):
+    print(fib(i))
+```
+
+This works and outputs the first 10 Fibonacci number.
+
+Recursive solutions work and can make sense.
