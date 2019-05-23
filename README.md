@@ -282,6 +282,102 @@ We can analyze an algorithm for both space _and_ time complexity.
 If two algorithms are the same time complexity and memory usage is also important, we might opt for the iterative solution as the better choice. There may be different reasons to prioritize time and/or space complexity.
 
 
+`** Keep in mind:` when solving an algorithm problem (or whiteboard problem), finding _any_ solution is the first and more important step. Optimizing is the next step. If you're struggling to find an "elegant" or "optimized" solution, simply brute force first. Then openly find ways to optimize. Pre-mature optimization is not always ideal or necessary, as it typically increases the complexity of the code which makes it difficult to maintain and prone to bugs. Not every problem is worth those issues.
+
+For example, if we knew we'd never need to find fib() greater than input 4, then optimizing is unnecessary. If we think it would grow to fib(100), then that's a great reason to optimize.
+
+`Hash tables` (cache) takes up more space and are more complicated than lists, but they provide speed.
+
+
+## O(log n)
+
+`O(log n)`, called `log time`, indicates a logarithmic run time function, of log base 2 (so, sometimes seen as O(log2n) ). 
+
+If we have n elements, it will take the log of n * inputs to run the calculations - it will take logn of time units. If we have 1 unit, that will take (roughly) 0 time units to run. If it were linear (O(n)), 10 units would take 10 times units - but with O(log n), 10 units would only take 3 time units. At 100 units, it will take only 6 time units.
+
+Essentially, with log n, the choice of which next element to perform an action on is broken into a few possibilities, but only one is chosen. Typically, if each step involves _halving_ the remaining number of units, that indicates O(log n).
+
+For example, when searching in a phone book: if we are looking for "Smith" and open the phone book at random to "McDonald", we intuitively understand that the data set we should next look at is not before McDonald but _after_. We mentally broke the phone book into two data sets - before M and after M. Based on comparison, we know that Smith is going to be found after M. The next data set we choose to look at is based on a break point chosen in our first whole data set.
+
+On the graph image, this is depicted by the dark blue line of `O(log2n)`.
+
+O(log n) is faster than O(n), but its true speed advantage grows as the input items grow in number. The more inputs, the faster it is than O(n).
+
+A good example of O(log n) is `binary search`. With the binary search algorithm, a data set is halved on each iteration, and compares the median to the target value.
+
+Because the number of inputs is halved repeatedly, doubling the size of the input data has little effect on its run time. Unlike O(n), which would continue to double with double the input data, O(log n) only becomes slightly slower. This makes O(log n) and binary search extremely efficient when dealing with _large_ data sets.
+
+For further reading on O(log n): https://hackernoon.com/what-does-the-time-complexity-o-log-n-actually-mean-45f94bb5bfbf
+
+
+If we were searching a phone book and used this example, what is the run time?
+
+```
+phonebook = ['Aaron', 'Angela', 'Andrew', 'Banana', 'Beej', 'Cameron', 'Cindy', 'Cynthia']
+
+def name_in_phonebook(to_find):
+    for name in phonebook:
+        if name == to_find:
+            return True
+
+    return False
+
+print(name_in_phonebook("Beej"))
+```
+
+This example is O(n) - it's linear time. The run time will scale with the size of the phone book. While some names will be found faster than others (like Aaron, which is at the start of the list), we still calculate Big O  based on the _worst_ case scenario, or Big Theta based on the _average_ case scenario. 
+
+On _average_, this search will take roughly half the number of inputs in time units. In the _worst case_, it will take as long as the number of inputs in time units. So, for our Big O evaluation, this runs with linear time.
+
+Remember, Big Theta evaluation would also depend on if this function is being given an ordered list or not. If the list was not alphabetized, that may change the _average_ time it takes to find the name.
+
+
+We could optimize this if we know the list is organized by using binary search, to search the ordered list the same way a person would, by splitting the phone book into segments to narrow down our items as we search. By cutting the space in half each time, we would have an algorithm that is O(log n).
+
+
+
+What if we looped through the index letters until we find a matching start letter with the name we're searching for, and then loop through the values in the phone book that start with that letter?
+
+Since we're looping through the index of existing letters, it's still O(n) because the time increases with the number of starting letters in the phone book. While it will max at 26 units of time, and grow only based on the values it then loops through with that starting letter, it is still O(n).
+
+Although that method has two loops, they aren't _nested_. It's simply one loop that follows once the logic of the first loop is completed.
+
+*But wait - isn't that actually O(2n)?*
+
+If O(n) of the first loop + O(n) of the second loop, wouldn't that equate to O(2n)?
+
+Yes - but when evaluating algorithms, we _typically_ do not care about the integer in front of n in any linear time label. There are more advanced cases where it matters but _in general_, we care about the shape of the graphed line. For this example, whether O(n) or O(2n), the line will still be linear in shape, so we just refer to it as O(n).
+
+
+What if we used a linear search to get to the right starting letter index (B) and then used Binary Search to find "Beej" within the B name?
+
+```
+O(n) + O(log n) = ?
+```
+
+If we provide some imaginary time units based on n growing in size...
+
+```
+If n=1,000: 1,000 + 10 = 1,010
+If n=1,000,000: 1,000,000 + 20 = 1,000,020
+```
+
+Because O(n) is slower than O(log n), and Big O evaluates based on the _worst_ case scenario, we would still evaluate this algorithm as O(n), because if n becomes extremely large (like 1000), the time complexity is still 1000.
+
+O(n) will dominate the shape of the graphed line, because its larger time complexity dominates the overall time complexity of this algorithm. So we would consider it O(n) despite it including an O(log n) process too.
+
+** In short: When adding different Big O notations, evaluate based on the one that has the worst time complexity, aka the one whose time output will affect the overall run time the most.
+
+
+What if we want to find out the time complexity of a function without looking at its source code? For example, when Python runs a search on a dictionary, how do we know how efficient it is and what method it's using?
+
+We could time the results and plot them, to see the shape of the trend line. This would require vast dictionaries with thousands or millions of items to see the way it handles large data sets.
+
+
+
+
+2:12:05
+
 
 
 
