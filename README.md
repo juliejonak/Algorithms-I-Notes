@@ -23,6 +23,8 @@ If you found these notes helpful and want to show appreciation to the author, [c
 
 [Computing Big O Notes - Lambda](https://github.com/LambdaSchool/CS-Wiki/wiki/Computing-Big-O)  
 
+[Recommended CS Reading - Lambda](https://github.com/LambdaSchool/CS-Wiki/wiki/Computer-Science-Reading-List)  
+
 These notes are based off of [Beej's previous recording for CS13](https://www.youtube.com/watch?v=btgmegU676g&feature=youtu.be), which condenses the usual 4 hours of lecture down to 3.   
 
 The notes also pull from [this simple overview of Big O Notation](https://justin.abrah.ms/computer-science/big-o-notation-explained.html)  
