@@ -44,6 +44,8 @@ The notes also pull from [this simple overview of Big O Notation](https://justin
 
 [Big O Breakdown of Data Structures and Sorting Algorithms](https://bigocheatsheet.io)  
 
+[Free Khan Academy Algorithms Course](https://www.khanacademy.org/computing/computer-science/algorithms)  
+
 ** Also included in this repo is a copy of Grokking's Algorithms in PDF format. `Big O Notation` begins on page 10.  
 
 <br>
