@@ -51,6 +51,8 @@ The notes also pull from [this simple overview of Big O Notation](https://justin
 
 # Lecture Notes
 
+[CS19 Beej Jorgensen Lecture I](https://youtu.be/snW84IPmnaY)  
+
 ## What is Big O
 
 Big O Notation is a way to determine how efficient a function is, based on run time and space requirements. It evaluates based on the _worst_ case scenario of the function. 
