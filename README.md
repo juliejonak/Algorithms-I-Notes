@@ -19,6 +19,17 @@ If you found these notes helpful and want to show appreciation to the author, [c
 
 <br>
 
+## Pre-Class Videos
+
+[Runtime Complexity: 34 min](https://youtu.be/rEx9E_Oq8xg)  
+
+[Linear & Binary Search - 12 min](https://youtu.be/a1oLy-ft8o8)  
+
+[Recursion - 18 min](https://youtu.be/n59qpp0SNDo)  
+
+<br>
+
+
 ## Additional Resources
 
 [Computing Big O Notes - Lambda](https://github.com/LambdaSchool/CS-Wiki/wiki/Computing-Big-O)  
