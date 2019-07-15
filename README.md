@@ -13,6 +13,11 @@ i. [O(log n)](#O(log-n))
 j. [Determining Big O](#Determining-Big-O)  
 k. [The 3 Main Rules of Big O](#The-3-Main-Rules-of-Big-O)  
 
+<br>
+<br>
+
+If you found these notes helpful and want to show appreciation to the author, [coffee donations](buymeacoff.ee/G1stPBuYU) are much loved.  
+
 ## Additional Resources
 
 [Computing Big O Notes - Lambda](https://github.com/LambdaSchool/CS-Wiki/wiki/Computing-Big-O)  
