@@ -493,7 +493,7 @@ We could time the results and plot them, to see the shape of the trend line. Thi
 
 ## Determining Big O
 
-When we want to evaluate an alogirthm for time complexity, there are two questions we'll ask:
+When we want to evaluate an alogrithm for time complexity, there are two questions we'll ask:
 
 <br>
 
@@ -557,6 +557,8 @@ As a programmer, when you write an algorithm like this, mentally you should be c
 
 Just because it has a for loop does not mean it is O(n) - it's _how_ the loop processes that matters for the time complexity.
 
+--------------------------------------------------
+
 Let's try another one.
 
 <br>
@@ -576,7 +578,7 @@ def bar(n):
 
 This has a nested for loop - so given number of n, what is the maximum number of times each loop runs?
 
-We would assume this is O(n^2) because of the nested for loop, but let's adjust the function a little to be certain by logging the number of times we loop through the i loop and j loop:
+We would assume this is `O(n^2)` because of the nested for loop, but let's adjust the function a little to print the number of times we loop through the i loop and j loop, to be certain:
 
 <br>
 
@@ -609,11 +611,14 @@ s: 100, i count: 5, j count: 25
 
 Showing that the algorithm does in fact loop through n^2 times (5 * 5 = 25, and the j loop runs 25 times).
 
-When you see a nested loop, it's important to always stay alert to the problem that O(n^2) can become slow very quickly. If the expected inputs will become large, that's a good case for optimization.
+When you see a nested loop, it's important to always stay alert to the problem that `O(n^2)` can become slow very quickly. If the expected inputs will be large, that's a good case for optimization.
 
 _Keep in mind, not *all* nested loops are O(n^2) though._
 
-If we modify this loop to:
+
+--------------------------------------------------------
+
+If we modify the previous loop to:
 
 <br>
 
@@ -632,9 +637,9 @@ def baz(n):
 
 What is the time complexity now?
 
-Since we're only running the inner loop O(sqrt(n)) times, does that change the time complexity to O(sqrt(n))?
+Since we're only running the inner loop `O(sqrt(n))` times, does that change the time complexity to `O(sqrt(n))`?
 
-Again, let's expand this algorithm out to see how many loops are running:
+Again, let's expand this algorithm out to see how many loops are running by printing a count for each:
 
 <br>
 
@@ -652,8 +657,6 @@ def baz_expanded(n):
 
     return f's: {s}, i count: {len(i_count)}, j count: {len(j_count)}'
 
-print(baz(25))
-print(int(math.sqrt(25)))
 print(baz_expanded(25))
 ```
 
@@ -671,11 +674,10 @@ s: 3000, i count: 25, j count: 125
 
 If this algorithm were still O(n^2), the `j count` would be 625.
 
-But it's still running j sqrt(n) time for _every_ loop of i. While the loops are still fewer, it's still more similar to:
+`O(n) * O(sqrt(n))` = `O(n * sqrt(n))` = `O(n sqrt n)`
 
 > O(n) * O(sqrt(n)) = O(n * sqrt(n)) = `O(n sqrt n)`  
 
-This algorithm performs better than O(n^2) but evaluates to an unusual time complexity notation as well.
 
 <br>
 
@@ -698,7 +700,11 @@ def frotz(n):
 
 What is the time complexity of this algorithm?
 
-Before running it, let's consider.
+Before running it with printed counters, let's consider...
+
+The first loop runs `for i in range(n)` which gives it `O(n)`.
+
+The second loop runs `for j in range(2*n)` which gives it `O(2*n)`.
 
 <br>
 
@@ -710,7 +716,7 @@ But it's also a nested for loop which means the time complexity is O(n^2) becaus
 
 n * 2n in this algorithm equates to 2 * n^2, or two times n squared.
 
-Again we can expanded it out to see exactly how many times each loop runs:
+Again we can expanded it out and print counters to see exactly how many times each loop runs:
 
 <br>
 
@@ -728,7 +734,6 @@ def frotz_expanded(n):
 
     return f's: {s}, i count: {len(i_count)}, j count: {len(j_count)}'
 
-print(frotz(5))
 print(frotz_expanded(5))
 ```
 
@@ -748,7 +753,7 @@ s: 450, i count: 5, j count: 50
 > n^2 = 25  
 > 2 * n^2 = 50  
 
-This algorithm does in fact have the time complexity of `O(2 * n^2)`.
+This algorithm does in fact have the time complexity of `O(2 * n^2)`, as shown by the final loop count of 50, the exact output expected of O(2 * n^2) when the input is 5.
 
 
 >But remember that constants in Big O are dropped, so we would simplify this to O(n^2) process.  
