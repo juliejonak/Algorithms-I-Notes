@@ -46,6 +46,8 @@ The notes also pull from [this simple overview of Big O Notation](https://justin
 
 [Free Khan Academy Algorithms Course](https://www.khanacademy.org/computing/computer-science/algorithms)  
 
+[Counting Sort Visualization Video](https://www.youtube.com/watch?v=7zuGmKfUt7s)   
+
 ** Also included in this repo is a copy of Grokking's Algorithms in PDF format. `Big O Notation` begins on page 10.  
 
 <br>
