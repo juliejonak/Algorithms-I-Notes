@@ -14,9 +14,10 @@ j. [Determining Big O](#Determining-Big-O)
 k. [The 3 Main Rules of Big O](#The-3-Main-Rules-of-Big-O)  
 
 <br>
-<br>
 
-If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved.  
+If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved.    
+
+<br>
 
 ## Additional Resources
 
