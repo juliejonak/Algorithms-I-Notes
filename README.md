@@ -1,5 +1,18 @@
 # Algorithms and Sorting!
 
+[Lecture Notes](#Lecture-Notes)  
+a. [Additional Resources](#Additional-Resources)  
+b. [What is Big O](#What-is-Big-O)  
+c. [O(n)](#O(n))  
+d. [O(1)](#O(1))  
+e. [O(n^2)](#O(n^2))  
+f. [Memoization](#Memoization)  
+g. [Fibonacci Numbers](#Fibonacci-Numbers)  
+h. [Space Complexity](#Space-Complexity)  
+i. [O(log n)](#O(log-n))  
+j. [Determining Big O](#Determining-Big-O)  
+k. [The 3 Main Rules of Big O](#The-3-Main-Rules-of-Big-O)  
+
 ## Additional Resources
 
 [Computing Big O Notes - Lambda](https://github.com/LambdaSchool/CS-Wiki/wiki/Computing-Big-O)  
@@ -10,7 +23,7 @@ The notes also pull from [this simple overview of Big O Notation](https://justin
 
 [Another explanation](https://rob-bell.net/2009/06/a-beginners-guide-to-big-o-notation/) 
 
-[Big O Breadkdown of Data Structures and Sorting Algorithms](https://bigocheatsheet.io)  
+[Big O Breakdown of Data Structures and Sorting Algorithms](https://bigocheatsheet.io)  
 
 ** Also included in this repo is a copy of Grokking's Algorithms in PDF format. `Big O Notation` begins on page 10.  
 
@@ -18,6 +31,8 @@ The notes also pull from [this simple overview of Big O Notation](https://justin
 <br>
 
 # Lecture Notes
+
+## What is Big O
 
 Big O Notation is a way to determine how efficient a function is, based on run time and space requirements. It evaluates based on the _worst_ case scenario of the function. 
 
@@ -768,7 +783,7 @@ Constants don't change the _shape_ of the curve, only how steep it is. There is 
 <br>
 <br>
 
-## The 3 main rules of Big O
+## The 3 Main Rules of Big O
 
 
 > 1. Discard the constant  
