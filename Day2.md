@@ -1,34 +1,42 @@
 
-[Lecture II Notes](#Lecture-Notes)  
-a. [Pre-Class Resources](#Pre-Class-Resources)  
+# Lecture II Notes
+a. [Additional Resources](#Additional-Resources)  
 b. [Divide and Conquer](#Divide-and-Conquer)  
-
-
-c. [O(n)](#O(n))  
-d. [O(1)](#O(1))  
-e. [O(n^2)](#O(n^2))  
-f. [Memoization](#Memoization)  
-g. [Fibonacci Numbers](#Fibonacci-Numbers)  
-h. [Space Complexity](#Space-Complexity)  
-i. [O(log n)](#O(log-n))  
-j. [Determining Big O](#Determining-Big-O)  
-k. [The 3 Main Rules of Big O](#The-3-Main-Rules-of-Big-O)  
-
-<br>
-<br>
-
-If you found these notes helpful and want to show appreciation to the author, [coffee donations](buymeacoff.ee/G1stPBuYU) are much loved.  
+c. [Quick Sort](#Quick-Sort)  
+d. [Implementing Quick Sort](#Implementing-Quick-Sort)   
+e. [In Place Sorting](#In-Place-Sorting)   
 
 <br>
 
-# Pre-Class Resources
+If you feel so inclined, you can contribute to these notes by [donating coffee to the author](buymeacoff.ee/G1stPBuYU), for caffeine-fueled focus during lectures.    
+
+<br>
+
+# Additional Resources
+
+[Sorting Algorithms Animations](https://www.toptal.com/developers/sorting-algorithms)  
+
+[How to Compare Algorithm Run Time in Python](https://pythonhow.com/measure-execution-time-python-code/)  
+
+[Sorting Algorithms on Geeks for Geeks](https://www.geeksforgeeks.org/searching-algorithms/)   
+
+[How to Analyze Time Complexity of Sort and Search Algorithms](https://python-textbok.readthedocs.io/en/1.0/Sorting_and_Searching_Algorithms.html)  
 
 Additional Algorithmic Practice Problems: [Find the rotation point](practice_algs/find_rotation_point.py), [Find the smallest missing element](practice_algs/smallest_missing_element.py), and [sorted matrix search](practice_algs/sorted_matrix.py)
+
+<br>
+
+![Search and Sort Complexities](./search_sort_complexities.png "Search and Sort Complexities")  
 
 <br>
 <br>
 
 # Divide and Conquer
+
+> "It's only a problem if it's a problem"  
+> - Beej Jorgensen  
+
+<br>
 
 When would we use recursive solutions? Tree traversals and quick sort are instances where recursion creates an elegant solution that wouldn't be as possible iteratively.
 
@@ -108,6 +116,8 @@ When we use recursion, it uses a lot of memory, so each recursive calls allocate
 
 With Big O, we're interested in the number of times we have to run an operation. `add_list` just runs basic addition, which is a single operation, and it is being called one time for every element in the list, so this is `O(n)`.
 
+<br>
+<br>
 
 # Quick Sort
 
@@ -192,18 +202,207 @@ def quicksort(list):
 
 <br>
 
+Let's define our partition function next:
+
+<br>
+
+```
+def partition(list):
+    left = []
+    pivot = list[0] # Or make random, as a stretch
+    right = []
+
+    for v in list[1:]:
+        if v < pivot:
+            left.append(v)
+        else:
+            right.append(v)
+            
+    return left, pivot, right
+```
+
+<br>
+
+Let's test out a bunch of possible cases like so:
+
+<br>
+
+```
+print(quicksort([]))
+print(quicksort([1]))
+print(quicksort([1,2]))
+print(quicksort([2,1]))
+print(quicksort([2,2]))
+print(quicksort([5,3,9,4,8,1,7]))
+print(quicksort([1,2,3,4,5,6,7]))
+print(quicksort([9,8,7,6,5,4,3,2,1]))
+```
+
+<br>
+
+We already know off the tops of our heads that we have not setup our algorithm to handle edge cases like an input that is not a list, or is a list full of strings, etc.
+
+Our terminal returns back:
+
+<br>
+
+```
+[]
+[1]
+[1, 2]
+[1, 2]
+[2, 2]
+[1, 3, 4, 5, 7, 8, 9]
+[1, 2, 3, 4, 5, 6, 7]
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+<br>
+
+So we can see that it handles all of our tests well.
+
+It's important to analyze what you know about your incoming data before choosing a type of algorithm. If you know that your list is almost completely sorted, bubble sort would handle that the quickest. If the list is completely garbled, quick sort would be best.
+
+Even when we aren't handling sort, we need to customize our algorithmic choices to the data anticipated, _especially_ when dealing with large sets of data where time performance can have a huge impact.
+
+<br>
+<br>
+
+
+# In Place Sorting
+
+The quick sort function we wrote is not an in-place solution. When we sort that list, we're actually returning an entirely _new_ list. It's not returning the same list.
+
+This isn't time or space efficient because it takes time and data to copy lists over to newly allocated spots in memory. It would be more efficient to move items around within the original given list.
+
+This is `in-place sorting` -- using the original list to sort items within it and returning that same original list, but now sorted. We mutate the original list rather than making new lists.
+
+<br>
+
+To do in-place sorting, we need to be able to pass into the function the bounds of the current part of the list that we're working on, to ensure that we are only working on certain segments of the list at a time.
+
+We can give it a low index, and a high index, to indicate the start and stop points of the section of the list to work on.
+
+As we keep going, the low and high indices will change. Our base case should now change to where if the low and high are the _same_, then our list is sorted.
+
+Let's try it:
+
+<br>
+
+```
+def quicksort2(l, low, high):
+    if len(l) == 0 or len(l) == 1:
+        return l
+    
+    if low >= high:
+        return l
+
+    pivot_index = low
+
+    # Partitioning
+    for i in range(low, high):
+        
+        if l[i] < l[pivot_index]:
+            # If i is less than pivot, we need to swap it with the item after the pivot
+            l[i], l[pivot_index + 1] = l[pivot_index + 1], l[i]
+
+            # Then we'll swap the pivot with the item after the pivot
+            l[pivot_index], l[pivot_index + 1] = l[pivot_index + 1], l[pivot_index]
+
+            # Update the pivot index:
+            pivot_index += 1
+    
+    # Sort from low to the pivot index
+    quicksort2(l, low, pivot_index)
+    # Sort from the pivot index to high
+    quicksort2(l, pivot_index + 1, high)
+```
+
+<br>
+
+We're iterating through the list and checking if the item at `list[i]` is less than the item at `list[pivot_index]`. If it is, then we need to swap these items. 
+
+That has to happen in two steps. First we swap i with an item one _beyond_ the pivot index. Then we swap the pivot with the item after the pivot.
+
+Then we update the pivot index to search for the next item to sort in the array.
+
+In order to call this function without passing in three parameters, we can write a short helper function:
+
+<br>
+
+```
+def in_place_quicksort(l):
+    return quicksort2(l, 0, len(l))
+
+print(in_place_quicksort([]))
+print(in_place_quicksort([1]))
+print(in_place_quicksort([1,2]))
+print(in_place_quicksort([2,1]))
+print(in_place_quicksort([2,2]))
+print(in_place_quicksort([5,3,9,4,8,1,7]))
+print(in_place_quicksort([1,2,3,4,5,6,7]))
+print(in_place_quicksort([9,8,7,6,5,4,3,2,1]))
+```
+
+<br>
+
+Now we can run this function and it sorts our lists without allocating extra memory.
+
+Let's add some print statements just to see exactly what is happening at each step on one of the sorts:
+
+<br>
+
+```
+Our starting list is [5,3,9,4,8]. 
+
+Checking against 5. Current list is [5, 3, 9, 4]. 
+
+Checking against 3. Current list is [5, 3, 9, 4]. 
+
+3 is less than 5, so we need to swap l[i] (3) with l[pivot_index + 1] (3).
+Next, we will swap 5 with 3 and increase the pivot index from 0 to 1.
+Now the current list is [3, 5, 9, 4] 
+
+Checking against 9. Current list is [3, 5, 9, 4]. 
+
+Checking against 4. Current list is [3, 5, 9, 4]. 
+
+4 is less than 5, so we need to swap l[i] (4) with l[pivot_index + 1] (9).
+Next, we will swap 5 with 4 and increase the pivot index from 1 to 2.
+Now the current list is [3, 4, 5, 9] 
+
+
+Splitting list to check quicksort([3, 4, 5, 9], 0, 2) and quicksort([3, 4, 5, 9], 3, 4). 
+
+
+Checking against 3. Current list is [3, 4, 5, 9]. 
+
+Checking against 4. Current list is [3, 4, 5, 9]. 
 
 
 
+Splitting list to check quicksort([3, 4, 5, 9], 0, 0) and quicksort([3, 4, 5, 9], 1, 2). 
+
+Checking against 4. Current list is [3, 4, 5, 9]. 
 
 
 
+Splitting list to check quicksort([3, 4, 5, 9], 1, 1) and quicksort([3, 4, 5, 9], 2, 2). 
+
+Checking against 9. Current list is [3, 4, 5, 9]. 
 
 
 
+Splitting list to check quicksort([3, 4, 5, 9], 3, 3) and quicksort([3, 4, 5, 9], 4, 4). 
+
+Our final sorted list is [3, 4, 5, 9]
+
+```
+
+<br>
 
 
+This helps us visualize why we go through each swapping step and how the list is slowly being sorted, and split apart into smaller sorting lists.
 
-
-
-
+<br>
+<br>
