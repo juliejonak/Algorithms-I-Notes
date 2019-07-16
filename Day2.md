@@ -22,7 +22,7 @@ If you feel so inclined, you can contribute to these notes by [donating coffee t
 
 [How to Analyze Time Complexity of Sort and Search Algorithms](https://python-textbok.readthedocs.io/en/1.0/Sorting_and_Searching_Algorithms.html)  
 
-Additional Algorithmic Practice Problems: [Find the rotation point](practice_algs/find_rotation_point.py), [Find the smallest missing element](practice_algs/smallest_missing_element.py), and [sorted matrix search](practice_algs/sorted_matrix.py)
+Additional Algorithmic Practice Problems: [Find the rotation point](practice_algs/find_rotation_point.py), [Find the smallest missing element](practice_algs/smallest_missing_element.py), and [sorted matrix search](practice_algs/sorted_matrix.py). Video recording of lecture reviewing these with Sean Chen found [here](https://youtu.be/2nPItBCCjMA).  
 
 <br>
 
