@@ -33,6 +33,10 @@ Additional Algorithmic Practice Problems: [Find the rotation point](practice_alg
 
 # Divide and Conquer
 
+[Lecture II Recording](https://www.youtube.com/watch?v=hPQ0gr9cTPc&feature=youtu.be)  
+
+<br>
+
 > "It's only a problem if it's a problem"  
 > - Beej Jorgensen  
 
