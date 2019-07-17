@@ -6,7 +6,9 @@ Notes are broken down by day into their own separate files with pre-class or add
 
 [Lecture I Notes](Day1.md)  
 
-[Lecture II Notes](Day2.md)  
+[Lecture II Notes](Day2.md) 
+
+[Lecture III Notes](Day3.md)  
 
 
 <br>
