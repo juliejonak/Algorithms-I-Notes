@@ -27,6 +27,8 @@ If you feel so inclined, you can contribute to these notes by [donating coffee t
 
 [Visualgo](https://visualgo.net/en): visualizing data structures and algorithms through animation.  
 
+[Hacker's Delight](https://www.hackersdelight.org): a collection of programming tricks at the bit level.  
+
 <br>
 <br>
 
@@ -34,15 +36,15 @@ If you feel so inclined, you can contribute to these notes by [donating coffee t
 
 <br>
 
-[Lecture III Recording]()  
+[Lecture III Recording: CS19 Beej Jorgensen](https://www.youtube.com/watch?v=lB1n6lY8Lw0)  
 
 <br>
 
 # What is the difference between an algorithm and a function? 
 
-An algorithm is just a little more general than a function. An algorithm is a set of steps to solve some problem, whereas a function is a set of specific steps to solve a specific problem.
+An algorithm is a little more general than a function. An algorithm is a set of steps to solve some problem, whereas a function is a set of specific steps to solve a specific problem.
 
-"A function is concrete, and does have a machine implementation. In computer programming, a function is an implementation of an algorithm. An algorithm is a series of steps (a process) for performing a calculation, whereas a function is the mathematical relationship between parameters and results." - Google.
+> "A function is concrete, and does have a machine implementation. In computer programming, a function is an implementation of an algorithm. An algorithm is a series of steps (a process) for performing a calculation, whereas a function is the mathematical relationship between parameters and results." - Google
 
 <br>
 
