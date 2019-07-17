@@ -1,11 +1,15 @@
 
-# Lecture III Notes
+# Lecture III Notes  
 a. [Additional Resources](#Additional-Resources)  
+b. [What is the difference between an algorithm and a function?](#What-is-the-difference-between-an-algorithm-and-a-function?)   
+c. [Abstraction](#Abstraction)    
+d. [POLYA Problem Solving Technique](#POLYA-Problem-Solving-Technique)   
+e. [What if we don't understand the problem?](#What-if-we-don't-understand-the-problem?)   
+f. [Factorials](#Factorials)  
+g. [The 3 main rules of Big O](#The-3-main-rules-of-Big-O)  
+h. [Recursive Solution](#Recursive-Solution)  
+i. [Fibonacci Sequence](#Fibonacci-Sequence)  
 
-b. [Divide and Conquer](#Divide-and-Conquer)  
-c. [Quick Sort](#Quick-Sort)  
-d. [Implementing Quick Sort](#Implementing-Quick-Sort)   
-e. [In Place Sorting](#In-Place-Sorting)   
 
 <br>
 
@@ -23,9 +27,10 @@ If you feel so inclined, you can contribute to these notes by [donating coffee t
 
 [Visualgo](https://visualgo.net/en): visualizing data structures and algorithms through animation.  
 
+<br>
+<br>
 
-
-# # How to Write and Analyze Algorithms Notes
+# How to Write and Analyze Algorithms Notes
 
 <br>
 
@@ -33,7 +38,7 @@ If you feel so inclined, you can contribute to these notes by [donating coffee t
 
 <br>
 
-##### What is the difference between an algorithm and a function? 
+# What is the difference between an algorithm and a function? 
 
 An algorithm is just a little more general than a function. An algorithm is a set of steps to solve some problem, whereas a function is a set of specific steps to solve a specific problem.
 
@@ -41,7 +46,7 @@ An algorithm is just a little more general than a function. An algorithm is a se
 
 <br>
 
-##### Abstraction
+# Abstraction
 
 Abstraction is when we lessen the details/information, or when we use something without knowing how it works in detail.
 
@@ -125,7 +130,7 @@ Draw a diagram or picture to help fully understand the problem. You can draw a v
 <br>
 <br>
 
-## Is it common to calculate Big O in an interview?
+#### Is it common to calculate Big O in an interview?
 
 It depends on the industry and company - if that's important to them - but being able to look at something and give a rough example of the run time is an important skill.
 
@@ -201,11 +206,11 @@ print('Result when n is', n, 'is: ', iter_factorial(n))
 <br>
 <br>
 
-##### What would be the run time of this function?
+#### What would be the run time of this function?
 
-Result and the return statement will only run once, no matter how large n is.
+The result and the return statement will only run once, no matter how large n is.
 
-But the loop will run depend on how large n is. It will run n-1 times.
+But how long the loop will run depends on how large n is. It will run n-1 times.
 
 Remember though, we drop associated integers when evaluating run time so this would reduce down to `O(n)` or linear time.
 
@@ -244,7 +249,7 @@ def rec_factorial(n):
 
 <br>
 
-We should also consider, what about case when n=0:
+We should also consider, what about the case when `n=0`:
 
 <br>
 
@@ -260,7 +265,7 @@ def rec_factorial(n):
 
 <br>
 
-So with our base case, we know _when_ to stop, but we need to make sure with our recursive step, we're doing something to _get to the base case_. We need to use n-1.
+So with our base case, we know _when_ to stop, but we need to make sure with our recursive step, we're doing something to _get to the base case_. We need to use `n-1`.
 
 <br>
 
@@ -277,7 +282,7 @@ def rec_factorial(n):
 
 <br>
 
-Now, we're decreasing n but we still need to multiply the result by n:
+Now, we're decreasing `n` but we still need to multiply the result by `n`:
 
 <br>
 
@@ -295,15 +300,15 @@ def rec_factorial(n):
 <br>
 
 
-What is the runtime evaluation?
+#### What is the runtime evaluation?
 
 There are no loops but we do have a recursive function call. When we see a recursive call, we want to visualize, "How many times will this recursive function call be made?"
 
-In memory, all these calls are being _made_ but not _finishing_ until the base case is resolved. rec_factorial(3) has to wait on rec_factorial(2) to resolve, which waits for rec_factorial(1) to resolve.
+In memory, all these calls are being _made_ but not _finishing_ until the base case is resolved. `rec_factorial(3)` has to wait on `rec_factorial(2)` to resolve, which waits for `rec_factorial(1)` to resolve.
 
-In this case, the number of recursive calls being made increases by one every time n increases by one, so this resolves to O(n) or linear time still.
+In this case, the number of recursive calls being made increases by one every time n increases by one, so this resolves to `O(n)` or linear time still.
 
-While this may be time efficient though, it is not memory (space) efficient due to the open, waiting function calls that stack while waiting to hit the base case resolution.
+While this may be time efficient, it is not memory (space) efficient due to the open, waiting function calls that stack while waiting to hit the base case resolution.
 
 <br>
 <br>
